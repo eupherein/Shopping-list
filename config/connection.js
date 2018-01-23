@@ -1,21 +1,22 @@
-//mysql connection
+// Set up MySQL connection.
+var mysql = require("mysql");
 
 var connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-
-    // Your username
-    user: "root",
-
-    // Your password
-    password: "root",
-    database: "shopping_list_db"
+  port: 3306,
+  host: "localhost",
+  user: "root",
+  password: "root",
+  database: "shopping_list_db"
 });
 
-
-//mysql connection to db
-connection.connect(function (err) {
-    if (err) throw err;
+// Make connection.
+connection.connect(function(err) {
+  if (err) {
+    console.error("error connecting: " + err.stack);
+    return;
+  }
+  console.log("connected as id " + connection.threadId);
 });
 
-modeule.exports = connection;
+// Export connection for our ORM to use.
+module.exports = connection;
