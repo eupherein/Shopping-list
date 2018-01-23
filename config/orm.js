@@ -69,7 +69,7 @@ let orm = {
         });
     },
 
-    //objColVals {item Bar Soap, got-item: true}
+    //objColVals {item Bar Soap, gotItem: true}
     update: function(table, objColVals, condition, cb) {
         let queryString = "UPDATE " + table;
 

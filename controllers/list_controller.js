@@ -6,8 +6,8 @@ const router = express.Router();
 const list = require("../models/list.js");
 
 //create all routes and setup logic where required
-router.get('/', function(req, res) {
-    cat.all(function(data) {
+router.get('/', function (req, res) {
+    cat.all(function (data) {
         var hbsObject = {
             list: data
         };
@@ -18,14 +18,45 @@ router.get('/', function(req, res) {
 
 router.post("/api/list", function (req, res) {
     list.create([
-        "item", "got-item"
+        "item", "gotItem"
     ], [
-        req.body.name, req.body.sleepy
-    ], function(result) {
+            req.body.name, req.body.sleepy
+        ], function (result) {
 
-        //send back id of new quote
-        res.json({ id: result.insertId });
+            //send back id of new quote
+            res.json({ id: result.insertId });
+        });
+});
+
+router.put("/api/list/:id", function (req, res) {
+    let condition = "id = " + req.params.id;
+
+    console.log("condition", condition);
+
+    list.update({
+        gotItem: req.body.sleepy
+    }, condition, function (result) {
+        if (result.changedRows == 0) {
+            //if no changes to rows are found, ID does not exist; throw 404
+            return res.status(404).end();
+        } else {
+            res.status(200).end();
+        }
     });
 });
 
-router.put("")
+router.delete("/api/list/:id", function (req, res) {
+    let condition = "id = " + req.params.id;
+
+    list.delete(condition, function (result) {
+        if (result.affectedRows == 0) {
+            //if no changes to rows are found, ID does not exist; throw 404
+            return res.status(404).end();
+        } else {
+            res.status(200).end();
+        }
+    });
+});
+
+//export routes to use in server.js
+module.exports = router;

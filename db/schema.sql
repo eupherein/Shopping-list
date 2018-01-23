@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS shopping_list_db;
 CREATE DATABASE shopping_list_db;
 USE shopping_list_db;
 
@@ -8,6 +9,3 @@ item_name varchar(255) NOT NULL,
 got_item BOOLEAN NOT NULL, 
 PRIMARY KEY (id)
 );
-
--- Insert a set of records.
-INSERT INTO list (list) VALUES ('Burgers');
