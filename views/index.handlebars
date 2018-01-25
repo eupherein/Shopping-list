@@ -8,15 +8,15 @@
             </div>
         </div>
 
-        
+           
         <div class="col-xs-6">
             <ul>
-                {{#each plans}}
+                {{#each items}}
                 <li>
                     <p>
                         {{this.id}}. {{this.item}}
 
-                        <button data-itemid="{{this.id}}" type="button" class="btn btn-primary delItem">Delete Item</button>
+                        <button data-itemid="{{this.id}}" type="button" class="btn btn-primary gotItem">Delete Item</button>
                     </p>
                 </li>
             </ul>
@@ -44,3 +44,6 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    $(".")
+</script>
