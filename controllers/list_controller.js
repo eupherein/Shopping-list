@@ -17,11 +17,9 @@ router.get('/', function (req, res) {
 });
 
 router.post("/api/list", function (req, res) {
-    list.create([
-        "item", "gotItem"
-    ], [
-            req.body.name, req.body.sleepy
-        ], function (result) {
+    list.create(
+        ["item"],[req.body.item]
+         function (result) {
 
             //send back id of new quote
             res.json({ id: result.insertId });
