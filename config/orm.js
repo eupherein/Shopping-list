@@ -1,5 +1,3 @@
-import { print } from "util";
-
 //Import mysql connection
 const connection = require("../config/connection.js")
 
@@ -20,19 +18,7 @@ function objToSql(obj) {
 
     //loop through keys and push the value as a string intiger array
     for (let key in obj) {
-        let value = obj[key];
-
-        //check to skip hidden properties
-        if (Object.hasOwnProperty.call(obj, key)) {
-
-            //if there are spaces, add quotes (Bar Soap --> 'Bar Soap')
-            if (typeof value === "string" && value.indexOf("") >= 0) {
-                value = "'" + value + "'";
-            }
-
-            //{item: 'Bar Soap'} --> ["item='Bar Soap'"]
-            arr.push(key + '=' + value);
-        }
+        arr.push(key + "=" + obj[key]);
     }
 
     //translate array of strings to a single string separated with commas
@@ -41,9 +27,9 @@ function objToSql(obj) {
 
 //object for all sql statement functions
 let orm = {
-    all: function(tableInput, cb) {
+    all: function (tableInput, cb) {
         let queryString = "SELECT * FROM " + tableInput + ";"
-        connection.query(queryString, function(err, result) {
+        connection.query(queryString, function (err, result) {
             if (err) {
                 throw err;
             }
@@ -60,7 +46,9 @@ let orm = {
         queryString += printQuestionMarks(vals.length);
         queryString += ") ";
 
-        console.log(queryString, vals, function(err, result) {
+        console.log(queryString);
+
+        connection.query(queryString, vals, function (err, result) {
             if (err) {
                 throw err;
             }
@@ -70,7 +58,7 @@ let orm = {
     },
 
     //objColVals {item Bar Soap, gotItem: true}
-    update: function(table, objColVals, condition, cb) {
+    update: function (table, objColVals, condition, cb) {
         let queryString = "UPDATE " + table;
 
         queryString += " SET ";
@@ -79,7 +67,7 @@ let orm = {
         queryString += condition;
 
         console.log(queryString);
-        connection.query(queryString, function(err, result) {
+        connection.query(queryString, function (err, result) {
             if (err) {
                 throw err;
             }
@@ -89,12 +77,12 @@ let orm = {
     },
 
     //delete item from list 
-    delete: function(table, condition, cb) {
+    delete: function (table, condition, cb) {
         let queryString = "DELETE FROM " + table;
         queryString += " WHERE ";
         queryString += condition;
 
-        connection.query(queryString, function(err, result) {
+        connection.query(queryString, function (err, result) {
             if (err) {
                 throw err;
             }

@@ -3,6 +3,7 @@ const orm = require("../config/orm.js");
 var item = {
     all: function (cb) {
         orm.all("list", function (res) {
+            
             cb(res);
         });
     },
