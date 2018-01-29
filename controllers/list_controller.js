@@ -7,7 +7,7 @@ const list = require("../models/list.js");
 
 //create all routes and setup logic where required
 router.get('/', function (req, res) {
-    cat.all(function (data) {
+    list.all(function (data) {
         var hbsObject = {
             list: data
         };
@@ -16,14 +16,13 @@ router.get('/', function (req, res) {
     });
 });
 
-router.post("/api/list", function (req, res) {
-    list.create(
-        ["item"],[req.body.item]
-         function (result) {
-
-            //send back id of new quote
-            res.json({ id: result.insertId });
-        });
+router.post("/list", function (req, res) {
+    console.log("creating item");
+    list.create(["item"], [req.body.item], function (result) {
+        console.log("sending json for create item");
+        //send back id of new quote
+        res.json({ id: result.insertId });
+    });
 });
 
 router.put("/api/list/:id", function (req, res) {
