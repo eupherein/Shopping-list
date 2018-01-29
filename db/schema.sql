@@ -6,6 +6,6 @@ CREATE TABLE list
 (
 id int NOT NULL AUTO_INCREMENT,
 item varchar (255) NOT NULL,
-gotItem varchar (255) NULL,
+gotItem BOOLEAN DEFAULT false, 
 PRIMARY KEY (id)
 );

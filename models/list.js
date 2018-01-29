@@ -3,7 +3,7 @@ const orm = require("../config/orm.js");
 var item = {
     all: function (cb) {
         orm.all("list", function (res) {
-            
+
             cb(res);
         });
     },
@@ -15,14 +15,14 @@ var item = {
             cb(res);
         });
     },
-    update: function(objColVals, condition, cb) {
-        orm.update("list", objColVals, condition, function(res) {
-
-            cb(res);
-        });
+    update: function (id, cb) {
+        var condition = "id=" + id;
+        orm.update("list", {
+            gotItem: true
+        }, condition, cb);
     },
-    delete: function(condition, cb) {
-        orm.delete("list", condition, function(res) {
+    delete: function (condition, cb) {
+        orm.delete("list", condition, function (res) {
 
             cb(res);
         });

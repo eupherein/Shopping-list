@@ -18,31 +18,41 @@ router.get('/', function (req, res) {
 });
 
 router.post("/create", function (req, res) {
-    console.log("creating item");
     list.create(["item"], [req.body.item], function (result) {
-        console.log("sending json for create item");
         //send back id of new quote
-       // res.json({ id: result.insertId });
-       res.redirect("/");
+        // res.json({ id: result.insertId });
+        res.redirect("/");
     });
 });
 
-router.put("/api/list/:id", function (req, res) {
-    let condition = "id = " + req.params.id;
+router.put("/")
 
-    console.log("condition", condition);
+// router.post("/got-item", function (req, res) {
+//     console.log("moving to got list");
+//     list.update(["gotItem"], [req.body.gotItem], function (result) {
+//         console.log("got it!");
+//         //send back id of new quote
+//         // res.json({ id: result.insertId });
+//         res.redirect("/");
+//     });
+// });
 
-    list.update({
-        gotItem: req.body.sleepy
-    }, condition, function (result) {
-        if (result.changedRows == 0) {
-            //if no changes to rows are found, ID does not exist; throw 404
-            return res.status(404).end();
-        } else {
-            res.status(200).end();
-        }
-    });
-});
+// router.put("/got-item", function (req, res) {
+//     let condition = "id = " + req.params.id;
+
+//     console.log("condition", condition);
+
+//     list.update({
+//         gotItem: req.body.sleepy
+//     }, condition, function (result) {
+//         if (result.changedRows == 0) {
+//             //if no changes to rows are found, ID does not exist; throw 404
+//             return res.status(404).end();
+//         } else {
+//             res.status(200).end();
+//         }
+//     });
+// });
 
 router.delete("/api/list/:id", function (req, res) {
     let condition = "id = " + req.params.id;
