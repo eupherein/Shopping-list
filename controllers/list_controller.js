@@ -7,6 +7,7 @@ const list = require("../models/list.js");
 
 //create all routes and setup logic where required
 router.get('/', function (req, res) {
+    console.log("home route");
     list.all(function (data) {
         var hbsObject = {
             list: data
@@ -16,12 +17,13 @@ router.get('/', function (req, res) {
     });
 });
 
-router.post("/list", function (req, res) {
+router.post("/create", function (req, res) {
     console.log("creating item");
     list.create(["item"], [req.body.item], function (result) {
         console.log("sending json for create item");
         //send back id of new quote
-        res.json({ id: result.insertId });
+       // res.json({ id: result.insertId });
+       res.redirect("/");
     });
 });
 

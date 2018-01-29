@@ -5,7 +5,7 @@ USE shopping_list_db;
 CREATE TABLE list
 (
 id int NOT NULL AUTO_INCREMENT,
-itemName varchar(255) NOT NULL,
-gotItem BOOLEAN NOT NULL, 
+item varchar (255) NOT NULL,
+gotItem varchar (255) NULL,
 PRIMARY KEY (id)
 );
